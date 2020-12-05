@@ -1,0 +1,164 @@
+*
+*::after
+*::before
+    box-sizing: border-box
+
+:root
+    --cat hsl(200, 40%, 35%)
+    --bg hsl(200, 80%, 90%)
+    --size 40
+    --unit calc((var(--size) / 300) * 1vmin)
+
+body 
+    background-color var(--bg)
+    display: flex
+    justify-content: center
+    align-items: center
+
+.cat
+    position absolute
+    width: calc(300 * var(--unit))
+    height: calc(300 * var(--unit))
+    z-index: 2
+    transition: all 0.1s linear
+
+    &:hover
+        transform: scale(0.94)
+        cursor pointer
+
+    *
+        position absolute
+
+    &__head
+        top: 22%;
+        left: 28%;
+        transform: translate(-50%, -50%);
+        width: 41%;
+        height: 32%;
+        background: var(--cat)
+        border-radius: 50%/59%;
+
+    &__ears
+        top: 6%;
+        left: 28%;
+        width: 38%;
+        height: 12%;
+        transform: translate(-50%, -50%)
+    
+    &__ear
+        top: 0;
+        transform: rotate(var(--rotate));
+        width: 38%;
+        height: 100%;
+        background: var(--cat)
+        $clip = polygon(50% 0, 100% 100%, 0 100%)
+        clip-path: $clip
+
+        &--left
+            --rotate -20deg
+            left: 0%
+            animation shake 2s linear infinite
+
+        &--right
+            --rotate 20deg
+            right 0
+            animation shake 2s linear 1s infinite
+
+    &__neck
+        top: 42%;
+        left: 32%;
+        width: 62%;
+        height: 33%;
+        transform: translate(-50%, -50%);
+        background: var(--cat)
+        border-radius: 10% 10% 10% 10% / 100% 10% 10% 10%
+        $clip = polygon(30% 0, 50% 0, 94% 100%, 16% 100%)
+        clip-path: $clip
+    
+    &__necksupport
+        border calc(20 * var(--unit)) solid var(--cat)
+        width: 50%
+        height 70%
+        border-radius: 100%
+        $clip = polygon(0 50%, 40% 60%, 30% 100%, 0 100%)
+        clip-path: $clip
+        transform: rotate(var(--rotate))
+
+    &__necksupport--right
+        top -12%
+        left 33%
+        --rotate -4deg
+
+    &__necksupport--left
+        top 14%
+        left -31%
+        --rotate 214deg
+
+    &__body
+        top: 72%;
+        left: 36%;
+        width: 62%;
+        height: 53%;
+        transform: translate(-50%, -50%);
+        background: var(--cat)
+        border-radius: 48% 70% 76% 66%/90% 90% 46% 54%;
+
+    &__tails
+        top: 53%;
+        left: 78%;
+        width: 36%;
+        height: 78%;
+        transform: translate(-50%, -50%);
+        animation: ripple 1s linear infinite
+        transform-origin: 4% 98%
+
+    &__tail
+        width:130%
+        height: 60%
+        transform: translate(-50%, -50%) rotate(var(--rotate));
+        border calc(24 * var(--unit)) solid var(--cat)
+        border-radius: 100%
+        $clip = polygon(0 0, 100% 0, 100% 40%, 0 40%)
+        clip-path: $clip
+
+        &--left
+            top: 70%
+            left 14%
+            --rotate 120deg
+
+        &--right
+            top: 35%
+            left 90%
+            clip-path: $clip
+            --rotate -69deg
+
+    &__tailtop
+        top 10%
+        left 96%
+        width: 24%
+        height: 11%
+        transform: translate(-50%, -50%)
+        border-radius: 100%
+        background: var(--cat)
+
+@keyframes ripple
+    0%
+    50%
+    100%
+        transform:rotate(0deg) translate(-50%, -50%)
+    25%
+        transform:rotate(1deg) translate(-50%, -50%)
+    75%
+        transform:rotate(-1deg) translate(-50%, -50%)
+
+@keyframes shake
+    0%
+    10%
+    20%
+    30%
+        transform:rotate(var(--rotate)) translate(0%, 0%)
+    15%
+        transform:rotate(var(--rotate)) translate(4%, 0%)
+    25%
+        transform:rotate(var(--rotate)) translate(-4%, 0%)
+
